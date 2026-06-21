@@ -322,7 +322,9 @@ function Nav() {
   }, [open]);
 
   useEffect(() => {
-    const close = () => setOpen(false);
+    const close = () => {
+      if (window.innerWidth > 767) setOpen(false);
+    };
     window.addEventListener("resize", close);
     return () => window.removeEventListener("resize", close);
   }, []);
@@ -334,9 +336,9 @@ function Nav() {
           <NavAvatar src="/images/Hero/hero.webp" alt="" />
           SD<span>.</span>
         </a>
-        <div className={`nav-links ${open ? "open" : ""}`}>
+        <div className="nav-links">
           {links.map((link, index) => (
-            <a href={`#${link}`} onClick={() => setOpen(false)} key={link}>
+            <a href={`#${link}`} key={link}>
               <span>0{index + 1}</span> {link}
             </a>
           ))}
@@ -344,10 +346,47 @@ function Nav() {
             Résumé <ArrowDownRight size={14} />
           </a>
         </div>
-        <button className="menu-button" onClick={() => setOpen(!open)} aria-label="Toggle menu" aria-expanded={open}>
-          {open ? <X /> : <Menu />}
+        <button
+          type="button"
+          className="menu-button"
+          onClick={() => setOpen(true)}
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls="mobile-nav"
+        >
+          <Menu />
         </button>
       </nav>
+
+      <button
+        type="button"
+        className={`nav-backdrop ${open ? "open" : ""}`}
+        aria-label="Close menu"
+        onClick={() => setOpen(false)}
+        tabIndex={open ? 0 : -1}
+      />
+
+      <aside id="mobile-nav" className={`nav-drawer ${open ? "open" : ""}`} aria-hidden={!open}>
+        <div className="nav-drawer-head">
+          <a href="#home" className="monogram" onClick={() => setOpen(false)} aria-label="Shreyanka Dutta home">
+            <NavAvatar src="/images/Hero/hero.webp" alt="" />
+            SD<span>.</span>
+          </a>
+          <button type="button" className="drawer-close" onClick={() => setOpen(false)} aria-label="Close menu">
+            <X size={22} />
+          </button>
+        </div>
+        <nav className="nav-drawer-links" aria-label="Mobile navigation">
+          {links.map((link) => (
+            <a href={`#${link}`} onClick={() => setOpen(false)} key={link}>
+              {link}
+            </a>
+          ))}
+        </nav>
+        <a href="/resume.pdf" download className="button button-primary nav-drawer-cta" onClick={() => setOpen(false)}>
+          Download résumé <ArrowDownRight size={16} />
+        </a>
+      </aside>
     </header>
   );
 }
