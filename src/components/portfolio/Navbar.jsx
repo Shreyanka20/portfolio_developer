@@ -44,11 +44,13 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/70 border-b border-white/20 transition-transform duration-500 ease-in-out"
+        className={`fixed top-0 left-0 right-0 backdrop-blur-xl bg-white/70 border-b border-white/20 transition-transform duration-500 ease-in-out ${
+          menuOpen ? "z-[70]" : "z-50"
+        }`}
         style={{ transform: hidden && !menuOpen ? "translateY(-100%)" : "translateY(0)" }}
       >
         <div className="section-container flex items-center justify-between h-14 sm:h-16">
-          <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0">
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1 mr-3">
             <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#0F172A] flex items-center justify-center flex-shrink-0">
               <span className="text-white font-body text-xs sm:text-sm font-semibold tracking-wide">SD</span>
             </div>
@@ -81,11 +83,13 @@ export default function Navbar() {
           {/* Mobile menu button */}
           <button
             type="button"
-            onClick={() => setMenuOpen(true)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[#E5E7EB] text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED] transition-colors"
-            aria-label="Open menu"
+            onClick={() => setMenuOpen((open) => !open)}
+            className="lg:hidden relative z-10 flex-shrink-0 min-w-11 min-h-11 w-11 h-11 flex items-center justify-center rounded-full border border-[#E5E7EB] text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED] transition-colors touch-manipulation"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
           >
-            <Menu className="w-5 h-5" />
+            <Menu className={`w-6 h-6 pointer-events-none ${menuOpen ? "hidden" : "block"}`} />
+            <X className={`w-6 h-6 pointer-events-none ${menuOpen ? "block" : "hidden"}`} />
           </button>
         </div>
       </nav>
@@ -123,10 +127,10 @@ export default function Navbar() {
             <button
               type="button"
               onClick={closeMenu}
-              className="w-10 h-10 flex items-center justify-center text-[#0F172A] hover:text-[#7C3AED] transition-colors"
+              className="relative z-10 flex-shrink-0 min-w-11 min-h-11 w-11 h-11 flex items-center justify-center rounded-full border border-[#E5E7EB] text-[#0F172A] hover:border-[#7C3AED] hover:text-[#7C3AED] transition-colors touch-manipulation"
               aria-label="Close menu"
             >
-              <X className="w-6 h-6" />
+              <X className="w-6 h-6 pointer-events-none" />
             </button>
           </div>
 
