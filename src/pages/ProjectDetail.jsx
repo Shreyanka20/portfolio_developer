@@ -377,7 +377,15 @@ function DetailRow({ number, title, content }) {
       <div className="detail-divider hidden lg:block w-[1px] self-stretch bg-[#EDE9FE] flex-shrink-0" />
       <div className="flex-1 min-w-0 pl-8 lg:pl-0">
         <p className="font-body text-[#71717A] text-sm leading-relaxed mb-2">{detailSubtitles[number]}</p>
-        <p className="font-body text-[#0F172A] text-sm leading-relaxed">{content}</p>
+        {Array.isArray(content) ? (
+          <ul className="font-body text-[#0F172A] text-sm leading-relaxed space-y-2 list-disc pl-5">
+            {content.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+        ) : (
+          <p className="font-body text-[#0F172A] text-sm leading-relaxed">{content}</p>
+        )}
       </div>
     </div>
   );
@@ -389,18 +397,11 @@ export default function ProjectDetail() {
     (p) => p.projectName.toLowerCase().replace(/\s+/g, "-") === id
   ) || projectsData[0];
 
-  const heroImageOffset =
-    project.projectName === "Glodobaara"
-      ? "lg:ml-20"
-      : project.projectName === "Homi AI"
-        ? "lg:-mt-[60px] lg:ml-24"
-        : "lg:-mt-[60px] lg:ml-[164px]";
-
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       <Navbar />
 
-      <div className="section-container max-w-6xl pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20">
+      <div className="section-container pt-20 sm:pt-24 md:pt-28 pb-12 sm:pb-16 md:pb-20">
 
         {/* Back link */}
         <Link
@@ -412,9 +413,9 @@ export default function ProjectDetail() {
         </Link>
 
         {/* ── HERO ── */}
-        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-8 lg:gap-10 mb-10 sm:mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] gap-8 lg:gap-10 xl:gap-12 items-start mb-10 sm:mb-16">
           {/* Left: text */}
-          <div className="w-full lg:w-[38%] xl:w-[26%] flex flex-col justify-center order-1">
+          <div className="w-full min-w-0 flex flex-col justify-center">
             <h1
               className="font-heading font-medium text-[#0F172A] leading-tight mb-3"
               style={{ fontSize: "clamp(2rem, 8vw, 4.5rem)" }}
@@ -424,7 +425,7 @@ export default function ProjectDetail() {
             <span className="inline-block px-3 py-1 rounded text-xs font-body font-medium text-[#7C3AED] border border-[#DDD6FE] bg-[#F5F3FF] mb-4 sm:mb-5 w-fit">
               {project.category}
             </span>
-            <p className="font-body text-[#52525B] text-sm sm:text-base leading-relaxed mb-6 sm:mb-7 max-w-md lg:max-w-xs">
+            <p className="font-body text-[#52525B] text-sm sm:text-base leading-relaxed mb-6 sm:mb-7 max-w-xl">
               {project.description}
             </p>
             <a
@@ -441,7 +442,7 @@ export default function ProjectDetail() {
           </div>
 
           {/* Right: hero image */}
-          <div className={`w-full lg:w-[62%] xl:w-[68%] relative order-2 ${heroImageOffset}`}>
+          <div className="w-full min-w-0 relative">
             {project.projectName !== "Homi AI" && (
               <div
                 className="absolute inset-0 pointer-events-none"
@@ -456,7 +457,7 @@ export default function ProjectDetail() {
             <img
               src={project.heroImage}
               alt={project.projectName}
-              className={`block relative w-full mx-auto lg:mx-0 ${project.projectName === "Homi AI" ? "max-w-[92%] lg:max-w-[86%]" : "max-w-full"}`}
+              className="block relative w-full h-auto object-contain"
               style={{ zIndex: 1 }}
             />
           </div>

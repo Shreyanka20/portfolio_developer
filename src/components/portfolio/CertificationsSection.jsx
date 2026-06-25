@@ -284,6 +284,10 @@ export default function CertificationsSection() {
             {/* Card 01 — Dark feature card, spans 2 rows */}
             <div
               className="cert-card sr sr-bento bento-shine bento-float sr-d1 md:col-span-2 lg:col-span-1 lg:row-span-2 rounded-3xl p-6 md:p-8 flex flex-col relative overflow-hidden bento-hover min-h-[360px] md:min-h-[480px]"
+              style={{
+                background: "linear-gradient(145deg, #1E1040 0%, #0D0D14 100%)",
+                border: "1px solid rgba(124,58,237,0.3)",
+              }}
             >
               {/* Top icon */}
               <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-8">
@@ -296,7 +300,7 @@ export default function CertificationsSection() {
               <p className="font-heading font-medium text-white leading-none mb-2" style={{ fontSize: "3.5rem" }}>08</p>
               <p className="font-body text-[#C4B5FD] text-lg font-medium mb-4">Certifications</p>
               <div className="w-8 h-[2px] bg-[#7C3AED] rounded-full mb-4" />
-              <p className="font-body text-[#6D5FA0] text-sm leading-relaxed">
+              <p className="font-body text-[#C4B5FD] text-sm leading-relaxed">
                 Across domains that power my journey.
               </p>
 

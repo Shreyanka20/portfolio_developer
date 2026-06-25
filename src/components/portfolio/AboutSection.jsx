@@ -47,11 +47,13 @@ export default function AboutSection() {
             <Star className="w-6 h-6 text-[#7C3AED]" />
           </div>
           <p className="text-stagger text-stagger-1 font-body text-[#0F172A] text-lg leading-relaxed flex-1">
-            I'm a Software Engineer who loves turning ideas into impactful digital solutions.
-            With 2+ years of full-stack development experience across web, mobile, and AI domains,
-            I build scalable, user-centric products that solve real-world problems.
-            I believe in clean architecture, continuous learning, and the power of collaboration
-            to create meaningful and lasting impact.
+            Some of the best products begin as undefined problems. That's where I do my best work.
+            I enjoy working in fast-moving environments where ownership matters more than job titles.
+            Over the past few years, I've built AI-powered products, full-stack platforms, and production-ready web applications,
+            often taking ideas from early concepts to deployment while navigating evolving requirements, new technologies, and tight timelines.
+            Whether I'm architecting backend systems, integrating AI workflows, or refining frontend experiences,
+            I focus on building software that is scalable, reliable, and genuinely useful.
+            I believe the best engineers aren't just fast learners—they know how to apply what they learn to solve meaningful problems.
           </p>
         </div>
 
